@@ -4,9 +4,9 @@
 
 #include <unordered_map>
 
-#include "../../util/singleton.h"
-#include "../../ecs/ecs.h"
-#include "../../ecs/component.h"
+#include "util/singleton.h"
+#include "../ecs.h"
+#include "../component.h"
 #include "factory.h"
 
 #define H_REGISTER_COMPONENT_FACTORY(name, class_name)\

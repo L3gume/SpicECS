@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/notjustin/Projects/SpicECS/build",
+  "command": "/usr/sbin/c++   -I/home/notjustin/Projects/SpicECS/SpicECS   -std=c++17   -std=gnu++17 -o CMakeFiles/SpicECS.dir/src/main.cpp.o -c /home/notjustin/Projects/SpicECS/src/main.cpp",
+  "file": "/home/notjustin/Projects/SpicECS/src/main.cpp"
+}
+]

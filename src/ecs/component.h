@@ -4,9 +4,9 @@
 
 #include "ecs.h"
 
-#include "../3rdParty/rapidjson/rapidjson.h"
-#include "../3rdParty/rapidjson/document.h"
-#include "../3rdParty/rapidjson/allocators.h"
+#include "../3rdparty/rapidjson/rapidjson.h"
+#include "../3rdparty/rapidjson/document.h"
+#include "../3rdparty/rapidjson/allocators.h"
 
 namespace ecs
 {

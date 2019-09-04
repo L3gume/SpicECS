@@ -4,7 +4,7 @@
 
 #include "ecs.h"
 #include "component.h"
-#include "../components/factory/factory.h"
+#include "componentfactory/factory.h"
 
 namespace ecs
 {

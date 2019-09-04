@@ -2,7 +2,7 @@
 #ifndef ECS_COMPONENTFACTORY_H
 #define ECS_COMPONENTFACTORY_H
 
-#include "../../ecs/component.h"
+#include "../component.h"
 
 namespace ecs
 {
