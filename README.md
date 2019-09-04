@@ -6,6 +6,6 @@ This project is inspired from other existing implementations and served as a lea
 
 ### Missing Features
 
-[] JSON serialization
-[] UUIDs for entities
-[] Prefabs (à la Unity)
+* JSON serialization [done]
+* UUIDs for entities
+* Prefabs (à la Unity)
