@@ -16,6 +16,11 @@
 #include <algorithm>
 #include <fstream>
 
+// one of these headers uses a deprecated boost header, sad
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
+
 namespace ecs
 {
 
@@ -28,6 +33,8 @@ constexpr std::size_t MAX_GROUPS{32};
 using ComponentID = std::size_t;
 using Group = std::size_t;
 using GroupBitset = std::bitset<MAX_GROUPS>;
+using Uuid = boost::uuids::uuid;
+
 
 /*
  * Stuff
@@ -37,11 +44,18 @@ inline ComponentID getUniqueComponentID() noexcept {
 	return lastID++;
 }
 
-// Template Magic, have fun trying to figure it out!
+// Template Magic :)
 template<typename T>
 ComponentID getComponentTypeID() noexcept {
 	static auto typeID{getUniqueComponentID()};
 	return typeID;
 }
+
+// Generate a new random Uuid
+Uuid generateUuid() noexcept {
+    return boost::uuids::random_generator()();
+}
+
 }
 #endif //ECS_ECS_H
+

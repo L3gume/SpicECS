@@ -6,12 +6,11 @@
 #include <sstream>
 #include <filesystem>
 
-#include "../math/vec.h"
+//#include "../math/vec.h"
 #include "../ecs/ecs.h"
 #include "../ecs/entitymanager.h"
 #include "../ecs/component.h"
 #include "../ecs/reflection/reflection.h"
-#include "../components/AnimatedSpriteComponent.h"
 #include "serializable.h"
 
 #define H_SERIALIZE_IMPL(class_name) \
@@ -91,7 +90,9 @@ struct HSerializer::HSerializerType<std::filesystem::path> {
     }
 };
 
-
+// these types are not included in this repo
+// you may add your own types here to define how to serialize/deserialize them
+/*
 template <>
 struct HSerializer::HSerializerType<vec2i> {
     static void Resolve(const char* name, const vec2i& value, rapidjson::Document& root) {
@@ -148,6 +149,7 @@ struct HSerializer::HSerializerType<vec4f> {
         root.PushBack(arr, alloc);
     }
 };
+*/
 
 template <typename T>
 struct HSerializer::HSerializerType<T, typename std::enable_if<std::is_base_of<ISerializable, T>::value>::type> {
@@ -311,6 +313,9 @@ struct HDeserializer::HDeserializerType<std::filesystem::path> {
     }
 };
 
+// these types are not included in this repo
+// you may add your own types here to define how to serialize/deserialize them
+/*
 template <>
 struct HDeserializer::HDeserializerType<vec2i> {
     static void Resolve(vec2i& value, const rapidjson::Value& root) {
@@ -346,6 +351,7 @@ struct HDeserializer::HDeserializerType<vec4f> {
         }
     }
 };
+*/
 
 template <typename T>
 struct HDeserializer::HDeserializerType<T, typename std::enable_if<std::is_base_of<ISerializable, T>::value>::type> {

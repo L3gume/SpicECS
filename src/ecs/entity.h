@@ -16,29 +16,17 @@ using ComponentArray = std::array<Component *, MAX_COMPS>;
 	
 class Entity {
 	friend class EntityManager;
-private:
-	EntityManager* m_manager;
-	/*
-	 * Unique_ptrs make it so we don't leak any memory
-	 */
-	std::vector<std::unique_ptr<Component>> m_components;
-	ComponentBitset m_componentBitset;
-	ComponentArray m_componentArray;
-	GroupBitset m_groupBitset;
-
-	std::vector<Entity*> m_children;
-	Entity* m_parent;
-
-	std::string m_sName;
-	uint64_t m_iId;
-
-	bool m_bDestroyed = false; // entity will be removed from manager when this is true. Components are unique_ptr
-							   // so no need to worry about them
 public:
+    
 	std::string getName() const { return m_sName; }
-	uint64_t getId() const { return m_iId; }
+    
+    Uuid getUuid() const { return m_uuid; }
+    void setUuid(Uuid uuid) { m_uuid = uuid; }
+    
 	const Entity* getParent() const { return m_parent; }
+    
 	const std::vector<Entity*>& getChildren() const { return m_children; };
+    
 	void destroy() { m_bDestroyed = true; }
 	
     void addChild(Entity* child) {
@@ -137,6 +125,24 @@ public:
         return m_components;
     }
     
+private:
+	EntityManager* m_manager;
+	/*
+	 * Unique_ptrs make it so we don't leak any memory
+	 */
+	std::vector<std::unique_ptr<Component>> m_components;
+	ComponentBitset m_componentBitset;
+	ComponentArray m_componentArray;
+	GroupBitset m_groupBitset;
+
+	std::vector<Entity*> m_children;
+	Entity* m_parent;
+
+	std::string m_sName;
+    Uuid m_uuid;
+
+	bool m_bDestroyed = false; // entity will be removed from manager when this is true. Components are unique_ptr
+							   // so no need to worry about them
 };
 	
 }

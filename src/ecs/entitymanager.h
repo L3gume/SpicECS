@@ -37,13 +37,18 @@ public:
 
 	/*
 	 * Add an entity to the manager.
+     * the second argument dictates whether or not to generate a Uuid,
+     * not required when loading serialized entities and scenes, as the Uuids
+     * need to be persisted
 	 */
-	Entity &addEntity(std::string _name) {
+	Entity &addEntity(std::string _name, bool _genUuid = true) {
 		Entity *e {new Entity{}};
 
 		e->m_manager = this;
 		e->m_sName = std::move(_name); // since we're passing by copy and only copying once.
-		e->m_iId = 0;// generateUniqueID(); // may be useful
+        if (_genUuid) {
+            e->m_uuid = std::move(generateUuid());
+        }
 
 		std::shared_ptr<Entity> sPtr(e);
 		m_entities.emplace_back(std::move(sPtr));

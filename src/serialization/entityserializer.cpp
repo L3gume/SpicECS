@@ -1,6 +1,9 @@
 #include <string>
 #include <iostream>
 
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_io.hpp>
+
 #include "entityserializer.h"
 #include "componentserializer.h"
 
@@ -13,6 +16,10 @@ void hentityserializer::serializeEntity(ecs::Entity* entity, rapidjson::Document
     
     auto s = rapidjson::Value(entity->getName().c_str(), alloc);
     entDoc.AddMember("Name", s, alloc);
+    std::stringstream ss;
+    ss << entity->getUuid();
+    auto u = rapidjson::Value(ss.string(), alloc);
+    entDoc.AddMember("Uuid", u, alloc);
     
     rapidjson::Document componentsDoc(&alloc);
     componentsDoc.SetObject();
@@ -40,7 +47,15 @@ void hentityserializer::deserializeEntity(ecs::Entity* parent, ecs::EntityManage
     
     assert(root.HasMember("Name"));
     assert(root["Name"].IsString());
-    auto& ent = entMgr.addEntity(root["Name"].GetString());
+    auto& ent = entMgr.addEntity(root["Name"].GetString(), false);
+    
+    assert(root.HasMember("Uuid"));
+    assert(root["Uuid"].IsString());
+    boost::uuids::uuid uid;
+    std::stringstream ss;
+    ss << root["Uuid"].GetString();
+    ss >> uid;
+    ent.setUuid(uid);
     
     if (parent != nullptr) {
         ent.setParent(parent);

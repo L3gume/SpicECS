@@ -2,7 +2,8 @@
 #ifndef H_SCENE_SERIALIZER
 #define H_SCENE_SERIALIZER
 
-#include "../3rdParty/rapidjson/allocators.h"
+#include <filesystem>
+#include "../3rdparty/rapidjson/allocators.h"
 
 #include "../ecs/entity.h"
 #include "../ecs/entitymanager.h"

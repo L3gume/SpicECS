@@ -42,10 +42,15 @@ file(GLOB_RECURSE UTIL_DIR
     "util/*.h"
     )
 
-add_executable(SpicECS ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp ${ECS_DIR} ${SERIALIZATION_DIR} ${RAPIDJSON_DIR} ${UTIL_DIR})
+file(GLOB_RECURSE COMPS_DIR
+    "example_components/*.h"
+    "example_components/*.cpp"
+    )
+
+add_executable(SpicECS ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp ${ECS_DIR} ${SERIALIZATION_DIR} ${RAPIDJSON_DIR} ${UTIL_DIR} ${COMPS_DIR})
 
 find_package(Boost REQUIRED)
 include_directories(SpicECS ${Boost_INCLUDE_DIRS})
 target_link_libraries(SpicECS ${Boost_LIBRARIES})
 
-target_link_libraries(SpicECS stdc++fs)
+target_link_libraries(SpicECS PUBLIC stdc++fs)
